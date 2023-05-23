@@ -289,6 +289,240 @@ db.paciente.insertMany([
       },
     ],
   },
+  {
+    cpf: "43678901234",
+    nome: "Pedro Oliveira",
+    dt_nasc: "1992-03-12",
+    endereco: {
+      rua: "Rua das Palmas",
+      bairro: "Jardim Botânico",
+      numero: "789",
+      cidade: "São Paulo",
+      cep: "54321-123",
+    },
+    historico_consultas: [
+      {
+        data: "2023-06-18",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Gripe",
+      },
+      {
+        data: "2023-08-05",
+        medico: "Dr. João",
+        especialidade: "Pediatra",
+        diagnostico: "Amigdalite",
+      },
+    ],
+  },
+  {
+    cpf: "34829012345",
+    nome: "Ana Santos",
+    dt_nasc: "1988-09-25",
+    endereco: {
+      rua: "Avenida das Rosas",
+      bairro: "Vila Feliz",
+      numero: "456",
+      cidade: "São Paulo",
+      cep: "98765-432",
+    },
+    historico_consultas: [
+      {
+        data: "2023-07-10",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Dor de cabeça",
+      },
+      {
+        data: "2023-09-20",
+        medico: "Dr. Marcos",
+        especialidade: "Ortopedista",
+        diagnostico: "Torção no tornozelo",
+      },
+    ],
+  },
+  {
+    cpf: "48789012823",
+    nome: "Carlos Oliveira",
+    dt_nasc: "1982-03-12",
+    endereco: {
+      rua: "Rua dos Lírios",
+      bairro: "Jardim Primavera",
+      numero: "789",
+      cidade: "São Paulo",
+      cep: "98765-432",
+    },
+    historico_consultas: [
+      {
+        data: "2023-06-25",
+        medico: "Dr. João",
+        especialidade: "Pediatra",
+        diagnostico: "Bronquite",
+      },
+      {
+        data: "2023-08-10",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Gripe",
+      },
+    ],
+  },
+  {
+    cpf: "99362772544",
+    nome: "Ana Rodrigues",
+    dt_nasc: "1975-09-18",
+    endereco: {
+      rua: "Avenida Central",
+      bairro: "Centro",
+      numero: "987",
+      cidade: "São Paulo",
+      cep: "56789-123",
+    },
+    historico_consultas: [
+      {
+        data: "2023-07-15",
+        medico: "Dr. Marcos",
+        especialidade: "Ortopedista",
+        diagnostico: "Torção no tornozelo",
+      },
+      {
+        data: "2023-09-02",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Sinusite",
+      },
+    ],
+  },
+  {
+    cpf: "12345678900",
+    nome: "Maria Silva",
+    dt_nasc: "1990-10-05",
+    endereco: {
+      rua: "Avenida das Flores",
+      bairro: "Vila Nova",
+      numero: "123",
+      cidade: "São Paulo",
+      cep: "12345-678",
+    },
+    historico_consultas: [
+      {
+        data: "2023-02-02",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Resfriado",
+      },
+      {
+        data: "2023-04-10",
+        medico: "Dr. Marcos",
+        especialidade: "Ortopedista",
+        diagnostico: "Fratura no braço",
+      },
+    ],
+  },
+  {
+    cpf: "98765432100",
+    nome: "João Santos",
+    dt_nasc: "1985-07-15",
+    endereco: {
+      rua: "Rua das Palmeiras",
+      bairro: "Centro",
+      numero: "456",
+      cidade: "São Paulo",
+      cep: "54321-987",
+    },
+    historico_consultas: [
+      {
+        data: "2023-03-20",
+        medico: "Dr. Marcos",
+        especialidade: "Ortopedista",
+        diagnostico: "Entorse no tornozelo",
+      },
+      {
+        data: "2023-05-05",
+        medico: "Dr. João",
+        especialidade: "Pediatra",
+        diagnostico: "Amigdalite",
+      },
+    ],
+  },
+  {
+    cpf: "11223344556",
+    nome: "Ana Souza",
+    dt_nasc: "1978-12-20",
+    endereco: {
+      rua: "Rua das Flores",
+      bairro: "Jardim Primavera",
+      numero: "789",
+      cidade: "São Paulo",
+      cep: "54321-123",
+    },
+    historico_consultas: [
+      {
+        data: "2023-01-15",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Gripe",
+      },
+      {
+        data: "2023-03-02",
+        medico: "Dr. João",
+        especialidade: "Pediatra",
+        diagnostico: "Sinusite",
+      },
+    ],
+  },
+  {
+    cpf: "99887766554",
+    nome: "Pedro Costa",
+    dt_nasc: "1995-05-12",
+    endereco: {
+      rua: "Rua dos Pinheiros",
+      bairro: "Jardim Sul",
+      numero: "321",
+      cidade: "São Paulo",
+      cep: "12345-543",
+    },
+    historico_consultas: [
+      {
+        data: "2023-02-18",
+        medico: "Dr. Marcos",
+        especialidade: "Ortopedista",
+        diagnostico: "Lesão no joelho",
+      },
+      {
+        data: "2023-04-05",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Dor de cabeça",
+      },
+    ],
+  },
+  {
+    cpf: "69367625566",
+    nome: "José Santos",
+    dt_nasc: "1995-08-12",
+    endereco: {
+      rua: "Rua das Oliveiras",
+      bairro: "Jardim Botânico",
+      numero: "789",
+      cidade: "São Paulo",
+      cep: "98765-432",
+    },
+    historico_consultas: [
+      {
+        data: "2023-07-10",
+        medico: "Dr. Guipa",
+        especialidade: "Clínico Geral",
+        diagnostico: "Dor de cabeça",
+      },
+      {
+        data: "2023-09-15",
+        medico: "Dr. João",
+        especialidade: "Pediatra",
+        diagnostico: "Gripe",
+      },
+    ],
+  },
 ]);
 
 // o prontuario eh unificado a todos os hospitais
