@@ -1,8 +1,150 @@
 // MongoDB CRUD - base de dados hospitais
 
-db.createCollection("hospital");
+db.createCollection(
+  "hospital",
+  { capped: true, size: 50 },
+  {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        required: ["codHospital", "nome", "endereco"],
+        properties: {
+          codHospital: {
+            bsonType: "int",
+            description: "Código do hospital",
+          },
+          nome: {
+            bsonType: "string",
+            description: "Nome do hospital",
+          },
+          endereco: {
+            bsonType: "object",
+            required: ["rua", "bairro", "numero", "cidade", "cep"],
+            properties: {
+              rua: {
+                bsonType: "string",
+                description: "Rua do hospital",
+              },
+              bairro: {
+                bsonType: "string",
+                description: "Bairro do hospital",
+              },
+              numero: {
+                bsonType: "string",
+                description: "Número do hospital",
+              },
+              cidade: {
+                bsonType: "string",
+                description: "Cidade do hospital",
+              },
+              cep: {
+                bsonType: "string",
+                description: "CEP do hospital",
+              },
+            },
+          },
+          medicos: {
+            bsonType: "array",
+            description: "Médicos do hospital",
+            items: {
+              bsonType: "object",
+              required: ["crm", "salario"],
+              properties: {
+                crm: {
+                  bsonType: "int",
+                  description: "CRM do médico",
+                },
+                salario: {
+                  bsonType: "float",
+                  description: "Salário do médico",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }
+);
 db.createCollection("medico");
-db.createCollection("paciente");
+db.createCollection(
+  "paciente",
+  { capped: true, size: 100000 },
+  {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        required: ["cpf", "nome", "dt_nasc"],
+        properties: {
+          cpf: {
+            bsonType: "string",
+            description: "CPF do paciente",
+          },
+          nome: {
+            bsonType: "string",
+            description: "Nome do paciente",
+          },
+          dt_nasc: {
+            bsonType: "date",
+            description: "Data de nascimento do paciente",
+          },
+          endereco: {
+            bsonType: "object",
+            required: ["rua", "bairro", "numero", "cidade", "cep"],
+            properties: {
+              rua: {
+                bsonType: "string",
+                description: "Rua do paciente",
+              },
+              bairro: {
+                bsonType: "string",
+                description: "Bairro do paciente",
+              },
+              numero: {
+                bsonType: "string",
+                description: "Número do paciente",
+              },
+              cidade: {
+                bsonType: "string",
+                description: "Cidade do paciente",
+              },
+              cep: {
+                bsonType: "string",
+                description: "CEP do paciente",
+              },
+            },
+          },
+          historico_consultas: {
+            bsonType: "array",
+            description: "Histórico de consultas do paciente",
+            items: {
+              bsonType: "object",
+              required: ["data", "medico", "especialidade", "diagnostico"],
+              properties: {
+                data: {
+                  bsonType: "date",
+                  description: "Data da consulta",
+                },
+                medico: {
+                  bsonType: "string",
+                  description: "Nome do médico",
+                },
+                especialidade: {
+                  bsonType: "string",
+                  description: "Especialidade do médico",
+                },
+                diagnostico: {
+                  bsonType: "string",
+                  description: "Diagnóstico da consulta",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }
+);
 db.createCollection("consulta");
 db.createCollection("enfermeiro");
 db.createCollection("prontuario");
@@ -98,7 +240,7 @@ db.paciente.insertMany([
   {
     cpf: "12345678900",
     nome: "Maria Silva",
-    dt_nasc: "05/10/1990",
+    dt_nasc: "1990-10-05",
     endereco: {
       rua: "Avenida das Flores",
       bairro: "Vila Nova",
@@ -159,7 +301,7 @@ db.consulta.insertMany([
     paciente: "Maria Silva",
     diagnostico: "Resfriado",
     cid: "J00",
-    internacao: null
+    internacao: null, // Não há internação associada a esta consulta
   },
   {
     data: "25/04/2023",
@@ -173,7 +315,7 @@ db.consulta.insertMany([
       data_alta: "26/04/2023",
       setor: "Emergência",
       hospital: "Hospital São Paulo",
-    }
+    },
   },
   {
     data: "20/03/2023",
@@ -196,7 +338,7 @@ db.consulta.insertMany([
     paciente: "João Santos",
     diagnostico: "Amigdalite",
     cid: "J03.9",
-    internacao: null // Não há internação associada a esta consulta
+    internacao: null,
   },
   {
     data: "15/06/2022",
@@ -205,7 +347,7 @@ db.consulta.insertMany([
     paciente: "Maria Silva",
     diagnostico: "Gripe",
     cid: "J10",
-    internacao: null // Não há internação associada a esta consulta
+    internacao: null,
   },
   {
     data: "25/07/2022",
@@ -219,7 +361,7 @@ db.consulta.insertMany([
       data_alta: "27/07/2022",
       setor: "UTI",
       hospital: "Hospital São Paulo",
-    }// Não há internação associada a esta consulta
+    },
   },
   {
     data: "10/08/2022",
@@ -228,7 +370,7 @@ db.consulta.insertMany([
     paciente: "João Santos",
     diagnostico: "Otite",
     cid: "H66.9",
-    internacao: null // Não há internação associada a esta consulta
+    internacao: null,
   },
   {
     data: "05/09/2022",
@@ -237,46 +379,69 @@ db.consulta.insertMany([
     paciente: "Maria Silva",
     diagnostico: "Dor de cabeça",
     cid: "R51",
-    internacao: null // Não há internação associada a esta consulta
+    internacao: null,
   },
 ]);
 
-
 // Coleção enfermeiro
-
+// Ana e João são enfermeiros chefes
 db.enfermeiro.insertMany([
   {
     coren: "54321",
     nome: "Enfermeira Ana",
     dt_nasc: "12/03/1992",
-    endereco: {
-      rua: "Rua das Flores",
-      bairro: "Vila Nova",
-      numero: "789",
-      cidade: "São Paulo",
-      cep: "98765-432",
-    },
     setor: "Emergência",
+    chefe: null,
+    hospital: 1,
   },
   {
     coren: "98765",
     nome: "Enfermeiro João",
     dt_nasc: "20/09/1988",
-    endereco: {
-      rua: "Rua dos Lírios",
-      bairro: "Centro",
-      numero: "321",
-      cidade: "São Paulo",
-      cep: "12345-678",
-    },
     setor: "UTI",
+    chefe: null,
+    hospital: 2,
   },
+  {
+    coren: "33333",
+    nome: "Enfermeira Laura",
+    dt_nasc: "15/02/1993",
+    setor: "Emergência",
+    chefe: "54321",
+    hospital: 1,
+  },
+  {
+    coren: "44444",
+    nome: "Enfermeiro Gabriel",
+    dt_nasc: "25/06/1991",
+    setor: "UTI",
+    chefe: "98765",
+    hospital: 2,
+  },
+  {
+    coren: "32749",
+    nome: "Enfermeira Juliana",
+    dt_nasc: "29/03/1987",
+    setor: "Emergência",
+    chefe: "54321",
+    hospital: 1,
+  }
+
 ]);
 
-// + adicionar colecao prontuario
+// o prontuario eh unificado a todos os hospitais
 // a coleção gera um relatorio mensal
 db.prontuario.insertMany([
   {
     mes_ano: "01/2023",
-  }
+    qtd_pacientes: 0,
+  },
+  {
+    mes_ano: "02/2023",
+    qtd_pacientes: 1,
+  },
+  {
+    mes_ano: "03/2023",
+    qtd_pacientes: 1,
+  },
 ]);
