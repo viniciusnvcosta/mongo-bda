@@ -182,6 +182,76 @@ db.medico.insertMany([
       { codHospital: "3", salario: 11000 },
     ],
   },
+  {
+    crm: "5200013",
+    dt_nasc: "1982-08-10",
+    nome: "Dr. Carla",
+    especialidade: "Dermatologista",
+    hospitais: [
+      { codHospital: "2", salario: 11000 },
+      { codHospital: "3", salario: 9000 },
+    ],
+  },
+  {
+    crm: "6200040",
+    dt_nasc: "1975-03-27",
+    nome: "Dr. Renato",
+    especialidade: "Cardiologista",
+    hospitais: [
+      { codHospital: "1", salario: 13000 },
+      { codHospital: "2", salario: 10000 },
+    ],
+  },
+  {
+    crm: "7200052",
+    dt_nasc: "1988-11-05",
+    nome: "Dr. Ana",
+    especialidade: "Ginecologista",
+    hospitais: [
+      { codHospital: "1", salario: 12000 },
+      { codHospital: "3", salario: 9500 },
+    ],
+  },
+  {
+    crm: "1122001",
+    dt_nasc: "1979-06-15",
+    nome: "Dr. Rafael",
+    especialidade: "Psiquiatra",
+    hospitais: [
+      { codHospital: "2", salario: 10500 },
+      { codHospital: "3", salario: 8500 },
+    ],
+  },
+  {
+    crm: "1223007",
+    dt_nasc: "1984-09-03",
+    nome: "Dra. Camila",
+    especialidade: "Oftalmologista",
+    hospitais: [
+      { codHospital: "1", salario: 14000 },
+      { codHospital: "2", salario: 11000 },
+    ],
+  },
+  {
+    crm: "1324003",
+    dt_nasc: "1981-07-18",
+    nome: "Dr. André",
+    especialidade: "Neurologista",
+    hospitais: [
+      { codHospital: "3", salario: 10000 },
+      { codHospital: "4", salario: 9000 },
+    ],
+  },
+  {
+    crm: "1425009",
+    dt_nasc: "1989-02-24",
+    nome: "Dra. Mariana",
+    especialidade: "Psicóloga",
+    hospitais: [
+      { codHospital: "4", salario: 8000 },
+      { codHospital: "5", salario: 7500 },
+    ],
+  },
 ]);
 
 // Coleção hospital
