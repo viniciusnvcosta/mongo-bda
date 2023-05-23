@@ -154,7 +154,7 @@ db.createCollection("prontuario");
 db.medico.insertMany([
   {
     crm: "2200001",
-    dt_nasc: "21/01/1980",
+    dt_nasc: "1980-01-21",
     nome: "Dr. Guipa",
     especialidade: "Clínico Geral",
     hospitais: [
@@ -164,7 +164,7 @@ db.medico.insertMany([
   },
   {
     crm: "3200005",
-    dt_nasc: "19/05/1986",
+    dt_nasc: "1986-05-19",
     nome: "Dr. Marcos",
     especialidade: "Ortopedista",
     hospitais: [
@@ -174,7 +174,7 @@ db.medico.insertMany([
   },
   {
     crm: "4200009",
-    dt_nasc: "12/12/1978",
+    dt_nasc: "1978-12-12",
     nome: "Dr. João",
     especialidade: "Pediatra",
     hospitais: [
@@ -250,13 +250,13 @@ db.paciente.insertMany([
     },
     historico_consultas: [
       {
-        data: "02/02/2023",
+        data: "2023-02-02",
         medico: "Dr. Guipa",
         especialidade: "Clínico Geral",
         diagnostico: "Resfriado",
       },
       {
-        data: "10/04/2023",
+        data: "2023-04-10",
         medico: "Dr. Marcos",
         especialidade: "Ortopedista",
         diagnostico: "Fratura no braço",
@@ -266,7 +266,7 @@ db.paciente.insertMany([
   {
     cpf: "98765432100",
     nome: "João Santos",
-    dt_nasc: "15/07/1985",
+    dt_nasc: "1985-07-15",
     endereco: {
       rua: "Rua das Palmeiras",
       bairro: "Centro",
@@ -276,13 +276,13 @@ db.paciente.insertMany([
     },
     historico_consultas: [
       {
-        data: "20/03/2023",
+        data: "2023-03-20",
         medico: "Dr. Marcos",
         especialidade: "Ortopedista",
         diagnostico: "Entorse no tornozelo",
       },
       {
-        data: "05/05/2023",
+        data: "2023-05-05",
         medico: "Dr. João",
         especialidade: "Pediatra",
         diagnostico: "Amigdalite",
@@ -291,157 +291,83 @@ db.paciente.insertMany([
   },
 ]);
 
-// Coleção consulta
-
-db.consulta.insertMany([
-  {
-    data: "02/02/2023",
-    medico: "Dr. Guipa",
-    especialidade: "Clínico Geral",
-    paciente: "Maria Silva",
-    diagnostico: "Resfriado",
-    cid: "J00",
-    internacao: null, // Não há internação associada a esta consulta
-  },
-  {
-    data: "25/04/2023",
-    medico: "Dr. Marcos",
-    especialidade: "Ortopedista",
-    paciente: "Maria Silva",
-    diagnostico: "Fratura no braço",
-    cid: "S52.5",
-    internacao: {
-      data_admissao: "25/04/2023",
-      data_alta: "26/04/2023",
-      setor: "Emergência",
-      hospital: "Hospital São Paulo",
-    },
-  },
-  {
-    data: "20/03/2023",
-    medico: "Dr. Marcos",
-    especialidade: "Ortopedista",
-    paciente: "João Santos",
-    diagnostico: "Entorse no tornozelo",
-    cid: "S93.4",
-    internacao: {
-      data_admissao: "20/03/2023",
-      data_alta: "22/03/2023",
-      setor: "UTI",
-      hospital: "Hospital São José",
-    },
-  },
-  {
-    data: "05/05/2023",
-    medico: "Dr. João",
-    especialidade: "Pediatra",
-    paciente: "João Santos",
-    diagnostico: "Amigdalite",
-    cid: "J03.9",
-    internacao: null,
-  },
-  {
-    data: "15/06/2022",
-    medico: "Dr. Guipa",
-    especialidade: "Clínico Geral",
-    paciente: "Maria Silva",
-    diagnostico: "Gripe",
-    cid: "J10",
-    internacao: null,
-  },
-  {
-    data: "25/07/2022",
-    medico: "Dr. Marcos",
-    especialidade: "Ortopedista",
-    paciente: "Maria Silva",
-    diagnostico: "Fratura na perna",
-    cid: "S82.1",
-    internacao: {
-      data_admissao: "25/07/2022",
-      data_alta: "27/07/2022",
-      setor: "UTI",
-      hospital: "Hospital São Paulo",
-    },
-  },
-  {
-    data: "10/08/2022",
-    medico: "Dr. João",
-    especialidade: "Pediatra",
-    paciente: "João Santos",
-    diagnostico: "Otite",
-    cid: "H66.9",
-    internacao: null,
-  },
-  {
-    data: "05/09/2022",
-    medico: "Dr. Guipa",
-    especialidade: "Clínico Geral",
-    paciente: "Maria Silva",
-    diagnostico: "Dor de cabeça",
-    cid: "R51",
-    internacao: null,
-  },
-]);
-
-// Coleção enfermeiro
-// Ana e João são enfermeiros chefes
-db.enfermeiro.insertMany([
-  {
-    coren: "54321",
-    nome: "Enfermeira Ana",
-    dt_nasc: "12/03/1992",
-    setor: "Emergência",
-    chefe: null,
-    hospital: 1,
-  },
-  {
-    coren: "98765",
-    nome: "Enfermeiro João",
-    dt_nasc: "20/09/1988",
-    setor: "UTI",
-    chefe: null,
-    hospital: 2,
-  },
-  {
-    coren: "33333",
-    nome: "Enfermeira Laura",
-    dt_nasc: "15/02/1993",
-    setor: "Emergência",
-    chefe: "54321",
-    hospital: 1,
-  },
-  {
-    coren: "44444",
-    nome: "Enfermeiro Gabriel",
-    dt_nasc: "25/06/1991",
-    setor: "UTI",
-    chefe: "98765",
-    hospital: 2,
-  },
-  {
-    coren: "32749",
-    nome: "Enfermeira Juliana",
-    dt_nasc: "29/03/1987",
-    setor: "Emergência",
-    chefe: "54321",
-    hospital: 1,
-  }
-
-]);
-
 // o prontuario eh unificado a todos os hospitais
 // a coleção gera um relatorio mensal
 db.prontuario.insertMany([
   {
-    mes_ano: "01/2023",
+    mes_ano: "2022-01",
+    qtd_pacientes: 2
+  },
+  {
+    mes_ano: "2022-02",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-03",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-04",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-05",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-06",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-07",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-08",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-02",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-09",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-10",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-11",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2022-12",
+    qtd_pacientes: 0
+  },
+  {
+    mes_ano: "2023-01",
     qtd_pacientes: 0,
   },
   {
-    mes_ano: "02/2023",
-    qtd_pacientes: 1,
+    mes_ano: "2023-02",
+    qtd_pacientes: 1
   },
   {
-    mes_ano: "03/2023",
-    qtd_pacientes: 1,
+    mes_ano: "2023-04",
+    qtd_pacientes: 1
+  },
+  {
+    mes_ano: "2023-05",
+    qtd_pacientes: 1
+  },
+  {
+    mes_ano: "2023-06",
+    qtd_pacientes: 1
+  },
+  {
+    mes_ano: "2023-07",
+    qtd_pacientes: 1
   },
 ]);
