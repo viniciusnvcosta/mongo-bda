@@ -149,7 +149,58 @@ db.createCollection("consulta");
 db.createCollection("enfermeiro");
 db.createCollection("prontuario");
 
-// Coleção medico
+// * Coleção hospital
+
+db.hospital.insertMany([
+  {
+    codHospital: "1",
+    nome: "Hospital São Paulo",
+    endereco: {
+      rua: "Rua dos Bobos",
+      bairro: "Centro",
+      numero: "0",
+      cidade: "São Paulo",
+      cep: "11000-456",
+    },
+    medicos: [
+      { crm: "2200001", salario: 10000 },
+      { crm: "4200009", salario: 15000 },
+    ],
+  },
+  {
+    codHospital: "2",
+    nome: "Hospital São José",
+    endereco: {
+      rua: "Rua dos Bichos",
+      bairro: "Jardim Paulista",
+      numero: "1504",
+      cidade: "São Paulo",
+      cep: "11002-777",
+    },
+    medicos: [
+      { crm: "2200001", salario: 8000 },
+      { crm: "3200005", salario: 12000 },
+    ],
+  },
+  {
+    codHospital: "3",
+    nome: "Hospital São Lucas",
+    endereco: {
+      rua: "Rua dos Gatos",
+      bairro: "Jardim América",
+      numero: "2000",
+      cidade: "São Paulo",
+      cep: "11004-999",
+    },
+    medicos: [
+      { crm: "3200005", salario: 9000 },
+      { crm: "4200009", salario: 11000 },
+    ],
+  },
+]);
+
+
+// * Coleção medico
 
 db.medico.insertMany([
   {
@@ -254,57 +305,7 @@ db.medico.insertMany([
   },
 ]);
 
-// Coleção hospital
-
-db.hospital.insertMany([
-  {
-    codHospital: "1",
-    nome: "Hospital São Paulo",
-    endereco: {
-      rua: "Rua dos Bobos",
-      bairro: "Centro",
-      numero: "0",
-      cidade: "São Paulo",
-      cep: "11000-456",
-    },
-    medicos: [
-      { crm: "2200001", salario: 10000 },
-      { crm: "4200009", salario: 15000 },
-    ],
-  },
-  {
-    codHospital: "2",
-    nome: "Hospital São José",
-    endereco: {
-      rua: "Rua dos Bichos",
-      bairro: "Jardim Paulista",
-      numero: "1504",
-      cidade: "São Paulo",
-      cep: "11002-777",
-    },
-    medicos: [
-      { crm: "2200001", salario: 8000 },
-      { crm: "3200005", salario: 12000 },
-    ],
-  },
-  {
-    codHospital: "3",
-    nome: "Hospital São Lucas",
-    endereco: {
-      rua: "Rua dos Gatos",
-      bairro: "Jardim América",
-      numero: "2000",
-      cidade: "São Paulo",
-      cep: "11004-999",
-    },
-    medicos: [
-      { crm: "3200005", salario: 9000 },
-      { crm: "4200009", salario: 11000 },
-    ],
-  },
-]);
-
-// Coleção paciente
+// * Coleção paciente
 
 db.paciente.insertMany([
   {
@@ -595,6 +596,155 @@ db.paciente.insertMany([
   },
 ]);
 
+// * Coleção consulta
+// ToDo Adicionar id de consulta
+db.consulta.insertMany([
+  {
+    data: "02/02/2023",
+    medico: "Dr. Guipa",
+    crm: "2200001",
+    paciente: "Maria Silva",
+    diagnostico: "Resfriado",
+    cid: "J00",
+    internacao: null, // Não há internação associada a esta consulta
+  },
+  {
+    data: "25/04/2023",
+    medico: "Dr. Marcos",
+    crm: "3200005",
+    paciente: "Maria Silva",
+    diagnostico: "Fratura no braço",
+    cid: "S52.5",
+    internacao: {
+      data_admissao: "25/04/2023",
+      data_alta: "26/04/2023",
+      setor: "Emergência",
+      hospital: "Hospital São Paulo",
+    },
+  },
+  {
+    data: "20/03/2023",
+    medico: "Dr. Marcos",
+    crm: "3200005",
+    paciente: "João Santos",
+    diagnostico: "Entorse no tornozelo",
+    cid: "S93.4",
+    internacao: {
+      data_admissao: "20/03/2023",
+      data_alta: "22/03/2023",
+      setor: "UTI",
+      hospital: "Hospital São José",
+    },
+  },
+  {
+    data: "05/05/2023",
+    medico: "Dr. João",
+    crm: "4200009",
+    paciente: "João Santos",
+    diagnostico: "Amigdalite",
+    cid: "J03.9",
+    internacao: null,
+  },
+  {
+    data: "15/06/2022",
+    medico: "Dr. Guipa",
+    crm: "2200001",
+    paciente: "Maria Silva",
+    diagnostico: "Gripe",
+    cid: "J10",
+    internacao: null,
+  },
+  {
+    data: "25/07/2022",
+    medico: "Dr. Marcos",
+    crm: "3200005",
+    paciente: "Maria Silva",
+    diagnostico: "Fratura na perna",
+    cid: "S82.1",
+    internacao: {
+      data_admissao: "25/07/2022",
+      data_alta: "27/07/2022",
+      setor: "UTI",
+      hospital: "Hospital São Paulo",
+    },
+  },
+  {
+    data: "10/08/2022",
+    medico: "Dr. João",
+    crm: "4200009",
+    paciente: "João Santos",
+    diagnostico: "Otite",
+    cid: "H66.9",
+    internacao: null,
+  },
+  {
+    data: "05/09/2022",
+    medico: "Dr. Guipa",
+    crm: "2200001",
+    paciente: "Maria Silva",
+    diagnostico: "Dor de cabeça",
+    cid: "R51",
+    internacao: null,
+  },
+  {
+    data: "20/09/2022",
+    medico: "Dr. Marcos",
+    crm: "3200005",
+    paciente: "João Santos",
+    diagnostico: "Torção no tornozelo",
+    cid: "S93.4",
+    internacao: null,
+  }
+]);
+// Index hash para data
+db.consulta.createIndex({ data: "hashed" });
+
+// * Coleção enfermeiro
+// Ana e João são enfermeiros chefes
+db.enfermeiro.insertMany([
+  {
+    coren: "54321",
+    nome: "Enfermeira Ana",
+    dt_nasc: "12/03/1992",
+    setor: "Emergência",
+    chefe: null,
+    hospital: 1,
+  },
+  {
+    coren: "98765",
+    nome: "Enfermeiro João",
+    dt_nasc: "20/09/1988",
+    setor: "UTI",
+    chefe: null,
+    hospital: 2,
+  },
+  {
+    coren: "33333",
+    nome: "Enfermeira Laura",
+    dt_nasc: "15/02/1993",
+    setor: "Emergência",
+    chefe: "54321",
+    hospital: 1,
+  },
+  {
+    coren: "44444",
+    nome: "Enfermeiro Gabriel",
+    dt_nasc: "25/06/1991",
+    setor: "UTI",
+    chefe: "98765",
+    hospital: 2,
+  },
+  {
+    coren: "32749",
+    nome: "Enfermeira Juliana",
+    dt_nasc: "29/03/1987",
+    setor: "Emergência",
+    chefe: "54321",
+    hospital: 1,
+  }
+]);
+
+// * Coleção prontuario
 // o prontuario eh unificado a todos os hospitais
 // a coleção gera um relatorio mensal
 db.prontuario.insertMany([
