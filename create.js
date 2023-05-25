@@ -600,7 +600,7 @@ db.paciente.insertMany([
 // ToDo Adicionar id de consulta
 db.consulta.insertMany([
   {
-    data: "02/02/2023",
+    data: "2023-02-02",
     medico: "Dr. Guipa",
     crm: "2200001",
     paciente: "Maria Silva",
@@ -609,35 +609,35 @@ db.consulta.insertMany([
     internacao: null, // Não há internação associada a esta consulta
   },
   {
-    data: "25/04/2023",
+    data: "2023-04-25",
     medico: "Dr. Marcos",
     crm: "3200005",
     paciente: "Maria Silva",
     diagnostico: "Fratura no braço",
     cid: "S52.5",
     internacao: {
-      data_admissao: "25/04/2023",
-      data_alta: "26/04/2023",
+      data_admissao: "25-04-2023",
+      data_alta: "26-04-2023",
       setor: "Emergência",
       hospital: "Hospital São Paulo",
     },
   },
   {
-    data: "20/03/2023",
+    data: "2023-03-20",
     medico: "Dr. Marcos",
     crm: "3200005",
     paciente: "João Santos",
     diagnostico: "Entorse no tornozelo",
     cid: "S93.4",
     internacao: {
-      data_admissao: "20/03/2023",
-      data_alta: "22/03/2023",
+      data_admissao: "20-03-2023",
+      data_alta: "22-03-2023",
       setor: "UTI",
       hospital: "Hospital São José",
     },
   },
   {
-    data: "05/05/2023",
+    data: "2023-05-05",
     medico: "Dr. João",
     crm: "4200009",
     paciente: "João Santos",
@@ -646,7 +646,7 @@ db.consulta.insertMany([
     internacao: null,
   },
   {
-    data: "15/06/2022",
+    data: "2022-06-15",
     medico: "Dr. Guipa",
     crm: "2200001",
     paciente: "Maria Silva",
@@ -655,21 +655,21 @@ db.consulta.insertMany([
     internacao: null,
   },
   {
-    data: "25/07/2022",
+    data: "2022-07-25",
     medico: "Dr. Marcos",
     crm: "3200005",
     paciente: "Maria Silva",
     diagnostico: "Fratura na perna",
     cid: "S82.1",
     internacao: {
-      data_admissao: "25/07/2022",
-      data_alta: "27/07/2022",
+      data_admissao: "25-07-2022",
+      data_alta: "27-07-2022",
       setor: "UTI",
       hospital: "Hospital São Paulo",
     },
   },
   {
-    data: "10/08/2022",
+    data: "2022-08-10",
     medico: "Dr. João",
     crm: "4200009",
     paciente: "João Santos",
@@ -678,7 +678,7 @@ db.consulta.insertMany([
     internacao: null,
   },
   {
-    data: "05/09/2022",
+    data: "2022-09-05",
     medico: "Dr. Guipa",
     crm: "2200001",
     paciente: "Maria Silva",
@@ -687,7 +687,7 @@ db.consulta.insertMany([
     internacao: null,
   },
   {
-    data: "20/09/2022",
+    data: "2022-09-20",
     medico: "Dr. Marcos",
     crm: "3200005",
     paciente: "João Santos",
@@ -696,8 +696,10 @@ db.consulta.insertMany([
     internacao: null,
   }
 ]);
-// Index hash para data
-db.consulta.createIndex({ data: "hashed" });
+// Index hash para consulta
+db.consulta.createIndex({ _id: "hashed" });
+// Index normal (B-Tree) para data, utilizado para ordenação
+db.consulta.createIndex({ data: 1 });
 
 // * Coleção enfermeiro
 // Ana e João são enfermeiros chefes
