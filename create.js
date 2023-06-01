@@ -2,14 +2,14 @@
 
 db.createCollection(
   "hospital",
-  { capped: true, size: 50 },
+  { capped: true, size: 100000 },
   {
     validator: {
       $jsonSchema: {
         bsonType: "object",
-        required: ["codHospital", "nome", "endereco"],
+        required: ["cnpjHosp", "nome", "endereco"],
         properties: {
-          codHospital: {
+          cnpjHosp: {
             bsonType: "int",
             description: "Código do hospital",
           },
@@ -153,7 +153,7 @@ db.createCollection("prontuario");
 
 db.hospital.insertMany([
   {
-    codHospital: "1",
+    cnpjHosp: "28478400000100",
     nome: "Hospital São Paulo",
     endereco: {
       rua: "Rua dos Bobos",
@@ -168,7 +168,7 @@ db.hospital.insertMany([
     ],
   },
   {
-    codHospital: "2",
+    cnpjHosp: "83551392000100",
     nome: "Hospital São José",
     endereco: {
       rua: "Rua dos Bichos",
@@ -183,7 +183,7 @@ db.hospital.insertMany([
     ],
   },
   {
-    codHospital: "3",
+    cnpjHosp: "79673692000100",
     nome: "Hospital São Lucas",
     endereco: {
       rua: "Rua dos Gatos",
@@ -209,8 +209,8 @@ db.medico.insertMany([
     nome: "Dr. Guipa",
     especialidade: "Clínico Geral",
     hospitais: [
-      { codHospital: "1", salario: 10000 },
-      { codHospital: "2", salario: 8000 },
+      { cnpjHosp: "28478400000100", salario: 10000 },
+      { cnpjHosp: "83551392000100", salario: 8000 },
     ],
   },
   {
@@ -219,8 +219,8 @@ db.medico.insertMany([
     nome: "Dr. Marcos",
     especialidade: "Ortopedista",
     hospitais: [
-      { codHospital: "2", salario: 12000 },
-      { codHospital: "3", salario: 9000 },
+      { cnpjHosp: "83551392000100", salario: 12000 },
+      { cnpjHosp: "79673692000100", salario: 9000 },
     ],
   },
   {
@@ -229,8 +229,8 @@ db.medico.insertMany([
     nome: "Dr. João",
     especialidade: "Pediatra",
     hospitais: [
-      { codHospital: "1", salario: 15000 },
-      { codHospital: "3", salario: 11000 },
+      { cnpjHosp: "28478400000100", salario: 15000 },
+      { cnpjHosp: "79673692000100", salario: 11000 },
     ],
   },
   {
@@ -239,8 +239,8 @@ db.medico.insertMany([
     nome: "Dr. Carla",
     especialidade: "Dermatologista",
     hospitais: [
-      { codHospital: "2", salario: 11000 },
-      { codHospital: "3", salario: 9000 },
+      { cnpjHosp: "83551392000100", salario: 11000 },
+      { cnpjHosp: "79673692000100", salario: 9000 },
     ],
   },
   {
@@ -249,8 +249,8 @@ db.medico.insertMany([
     nome: "Dr. Renato",
     especialidade: "Cardiologista",
     hospitais: [
-      { codHospital: "1", salario: 13000 },
-      { codHospital: "2", salario: 10000 },
+      { cnpjHosp: "28478400000100", salario: 13000 },
+      { cnpjHosp: "83551392000100", salario: 10000 },
     ],
   },
   {
@@ -259,8 +259,8 @@ db.medico.insertMany([
     nome: "Dr. Ana",
     especialidade: "Ginecologista",
     hospitais: [
-      { codHospital: "1", salario: 12000 },
-      { codHospital: "3", salario: 9500 },
+      { cnpjHosp: "28478400000100", salario: 12000 },
+      { cnpjHosp: "79673692000100", salario: 9500 },
     ],
   },
   {
@@ -269,8 +269,8 @@ db.medico.insertMany([
     nome: "Dr. Rafael",
     especialidade: "Psiquiatra",
     hospitais: [
-      { codHospital: "2", salario: 10500 },
-      { codHospital: "3", salario: 8500 },
+      { cnpjHosp: "83551392000100", salario: 10500 },
+      { cnpjHosp: "79673692000100", salario: 8500 },
     ],
   },
   {
@@ -279,8 +279,8 @@ db.medico.insertMany([
     nome: "Dra. Camila",
     especialidade: "Oftalmologista",
     hospitais: [
-      { codHospital: "1", salario: 14000 },
-      { codHospital: "2", salario: 11000 },
+      { cnpjHosp: "28478400000100", salario: 14000 },
+      { cnpjHosp: "83551392000100", salario: 11000 },
     ],
   },
   {
@@ -289,8 +289,8 @@ db.medico.insertMany([
     nome: "Dr. André",
     especialidade: "Neurologista",
     hospitais: [
-      { codHospital: "3", salario: 10000 },
-      { codHospital: "4", salario: 9000 },
+      { cnpjHosp: "79673692000100", salario: 10000 },
+      { cnpjHosp: "28478400000100", salario: 9000 },
     ],
   },
   {
@@ -299,11 +299,13 @@ db.medico.insertMany([
     nome: "Dra. Mariana",
     especialidade: "Psicóloga",
     hospitais: [
-      { codHospital: "4", salario: 8000 },
-      { codHospital: "5", salario: 7500 },
+      { cnpjHosp: "83551392000100", salario: 8000 },
+      { cnpjHosp: "79673692000100", salario: 7500 },
     ],
   },
 ]);
+// ! add after explain test
+db.medico.createIndex({ crm: 1 }, { unique: true });
 
 // * Coleção paciente
 
@@ -536,9 +538,9 @@ db.paciente.insertMany([
       },
       {
         data: "2023-03-02",
-        medico: "Dr. João",
-        especialidade: "Pediatra",
-        diagnostico: "Sinusite",
+        medico: "Dra. Carla",
+        especialidade: "Dermatologista",
+        diagnostico: "Micose",
       },
     ],
   },
@@ -694,7 +696,16 @@ db.consulta.insertMany([
     diagnostico: "Torção no tornozelo",
     cid: "S93.4",
     internacao: null,
-  }
+  },
+  {
+    data: "2023-03-02",
+    medico: "Dra. Carla",
+    crm: "5200009",
+    paciente: "Ana Souza",
+    diagnostico: "Micose",
+    cid: "B35.6",
+    internacao: null,
+  },
 ]);
 // Index hash para consulta
 db.consulta.createIndex({ _id: "hashed" });
