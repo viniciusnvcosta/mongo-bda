@@ -85,7 +85,8 @@ db.createCollection(
             description: "Nome do paciente",
           },
           dt_nasc: {
-            bsonType: "date",
+            // Date type
+            bsonType: "new Date()",
             description: "Data de nascimento do paciente",
           },
           endereco: {
@@ -199,7 +200,6 @@ db.hospital.insertMany([
   },
 ]);
 
-
 // * Coleção medico
 
 db.medico.insertMany([
@@ -306,6 +306,7 @@ db.medico.insertMany([
 ]);
 // ! add after explain test
 db.medico.createIndex({ crm: 1 }, { unique: true });
+db.medico.createIndex({ especialidade: 1 });
 
 // * Coleção paciente
 
@@ -597,6 +598,7 @@ db.paciente.insertMany([
     ],
   },
 ]);
+db.paciente.createIndex({ cpf: 1 }, { unique: true });
 
 // * Coleção consulta
 // ToDo Adicionar id de consulta
@@ -618,8 +620,8 @@ db.consulta.insertMany([
     diagnostico: "Fratura no braço",
     cid: "S52.5",
     internacao: {
-      data_admissao: "25-04-2023",
-      data_alta: "26-04-2023",
+      data_admissao: "2023-04-25",
+      data_alta: "2023-04-26",
       setor: "Emergência",
       hospital: "Hospital São Paulo",
     },
@@ -632,8 +634,8 @@ db.consulta.insertMany([
     diagnostico: "Entorse no tornozelo",
     cid: "S93.4",
     internacao: {
-      data_admissao: "20-03-2023",
-      data_alta: "22-03-2023",
+      data_admissao: "2023-03-20",
+      data_alta: "2023-03-22",
       setor: "UTI",
       hospital: "Hospital São José",
     },
@@ -664,8 +666,8 @@ db.consulta.insertMany([
     diagnostico: "Fratura na perna",
     cid: "S82.1",
     internacao: {
-      data_admissao: "25-07-2022",
-      data_alta: "27-07-2022",
+      data_admissao: "2022-07-25",
+      data_alta: "2022-07-27",
       setor: "UTI",
       hospital: "Hospital São Paulo",
     },
@@ -706,6 +708,24 @@ db.consulta.insertMany([
     cid: "B35.6",
     internacao: null,
   },
+  {
+    data: "2023-05-31",
+    medico: "Dra. Carla",
+    crm: "5200009",
+    paciente: "Pedro Oliveira",
+    diagnostico: "Queimadura",
+    cid: "T20.9",
+    internacao: null,
+  },
+  {
+    data: "2023-05-31",
+    medico: "Dr. Guipa",
+    crm: "2200001",
+    paciente: "Ana Santos",
+    diagnostico: "Covid-19",
+    cid: "B34.2",
+    internacao: null,
+  },
 ]);
 // Index hash para consulta
 db.consulta.createIndex({ _id: "hashed" });
@@ -718,7 +738,7 @@ db.enfermeiro.insertMany([
   {
     coren: "54321",
     nome: "Enfermeira Ana",
-    dt_nasc: "12/03/1992",
+    dt_nasc: "1992-03-12",
     setor: "Emergência",
     chefe: null,
     hospital: 1,
@@ -726,7 +746,7 @@ db.enfermeiro.insertMany([
   {
     coren: "98765",
     nome: "Enfermeiro João",
-    dt_nasc: "20/09/1988",
+    dt_nasc: "1988-09-20",
     setor: "UTI",
     chefe: null,
     hospital: 2,
@@ -734,7 +754,7 @@ db.enfermeiro.insertMany([
   {
     coren: "33333",
     nome: "Enfermeira Laura",
-    dt_nasc: "15/02/1993",
+    dt_nasc: "1993-02-15",
     setor: "Emergência",
     chefe: "54321",
     hospital: 1,
@@ -742,7 +762,7 @@ db.enfermeiro.insertMany([
   {
     coren: "44444",
     nome: "Enfermeiro Gabriel",
-    dt_nasc: "25/06/1991",
+    dt_nasc: "1991-06-25",
     setor: "UTI",
     chefe: "98765",
     hospital: 2,
@@ -750,12 +770,13 @@ db.enfermeiro.insertMany([
   {
     coren: "32749",
     nome: "Enfermeira Juliana",
-    dt_nasc: "29/03/1987",
+    dt_nasc: "1987-03-29",
     setor: "Emergência",
     chefe: "54321",
     hospital: 1,
-  }
+  },
 ]);
+db.enfermeiro.createIndex({ coren: 1 });
 
 // * Coleção prontuario
 // o prontuario eh unificado a todos os hospitais
@@ -763,55 +784,55 @@ db.enfermeiro.insertMany([
 db.prontuario.insertMany([
   {
     mes_ano: "2022-01",
-    qtd_pacientes: 2
+    qtd_pacientes: 2,
   },
   {
     mes_ano: "2022-02",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-03",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-04",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-05",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-06",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-07",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-08",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-02",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-09",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-10",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-11",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2022-12",
-    qtd_pacientes: 0
+    qtd_pacientes: 0,
   },
   {
     mes_ano: "2023-01",
@@ -819,22 +840,23 @@ db.prontuario.insertMany([
   },
   {
     mes_ano: "2023-02",
-    qtd_pacientes: 1
+    qtd_pacientes: 1,
   },
   {
     mes_ano: "2023-04",
-    qtd_pacientes: 1
+    qtd_pacientes: 1,
   },
   {
     mes_ano: "2023-05",
-    qtd_pacientes: 1
+    qtd_pacientes: 1,
   },
   {
     mes_ano: "2023-06",
-    qtd_pacientes: 1
+    qtd_pacientes: 1,
   },
   {
     mes_ano: "2023-07",
-    qtd_pacientes: 1
+    qtd_pacientes: 1,
   },
 ]);
+db.prontuario.createIndex({ mes_ano: 1 });
